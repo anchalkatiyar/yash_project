@@ -2,6 +2,7 @@ class StatusesController < ApplicationController
   # GET /statuses
   # GET /statuses.json
   def index
+  #yash project
     @statuses = Status.all
 
     respond_to do |format|
@@ -73,6 +74,7 @@ class StatusesController < ApplicationController
   # DELETE /statuses/1.json
   def destroy
     @status = Status.find(params[:id])
+	print @status
     @status.destroy
 
     respond_to do |format|

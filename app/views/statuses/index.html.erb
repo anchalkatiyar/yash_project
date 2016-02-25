@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Content</th>
+    <th>Content1</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,7 +15,11 @@
     <td><%= status.content %></td>
     <td><%= link_to 'Show', status %></td>
     <td><%= link_to 'Edit', edit_status_path(status) %></td>
-    <td><%= link_to 'Destroy', status, confirm: 'Are you sure?', method: :delete %></td>
+    <td><% link_to 'Delete', status, confirm: 'Are you sure?', method: :destroy %></td>
+	<td><%= link_to 'Destroy', status, method: :destroy, data:  {confirm: 'Are you sure?'} %></td>
+	 <td><% link_to 'Destroy1',  { action: :destroy, id: status.id }, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	 
+	<td><%= button_to "delete", status, :method => "delete" , data:  {confirm: 'Are you sure?'}%></td>
   </tr>
 <% end %>
 </table>
