@@ -1,0 +1,16 @@
+
+<%= form_for([@question,@answer]) do |f| %>
+
+<%= render 'common/form_errors', object: @answer %>
+    <p>
+        <%= f.label :body, "Answer"  %>
+        <%= f.text_field :body %>
+  
+    
+
+  
+      <%= f.submit "Post Answer", :disable_with => "Updating Answer....!", class: "btn btn-success"  %>
+
+    </p>
+
+<% end %> 

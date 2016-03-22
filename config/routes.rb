@@ -1,6 +1,40 @@
 YashProject::Application.routes.draw do
-  resources :statuses
+  get "questions/index"
 
+  get "profiles/show"
+
+  devise_for :users
+
+  devise_scope :user do
+	get 'register' , to: 'devise/registrations#new',as: :register
+	get 'login' , to: 'devise/sessions#new',as: :login
+	get 'logout' , to: 'devise/sessions#destroy',as: :logout
+#get request than url name than controller name and # and method name than , than as than name which is used in view	
+	
+  end
+  
+  
+  resources :statuses
+  
+  resources :questions, except: [:new] do
+	resources :answers, only: [:create]	
+  end
+  get 'feed', to: 'statuses#index', as: :feed
+  #root to: 'statuses#index'
+  root to: 'questions#index'
+   #get "user_profile", to: 'profiles#show'
+   #match "profile" => "users#show", :as => 'profile'
+   get "statuses/p_show/:id" => "statuses#p_show", :as => 'p_show'
+    
+   get '/your_questions', to: 'questions#your_questions'
+   #get '/status_page', to: 'statuses#status_page'
+  get 'profiles/show/:id', to: 'profiles#show'
+  
+  #get '/search', to: 'questions#search'
+ # post 'search' , to: 'questions#search',as: :search
+  #map.resources :search, :collection => { :index => :get, :results => :get }
+  #root :to => "home#index"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

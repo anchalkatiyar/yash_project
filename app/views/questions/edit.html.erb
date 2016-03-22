@@ -1,0 +1,19 @@
+<%= provide(:title,'Edit Your Question')%>
+<h2>  Edit your Question</h2>
+
+<%= form_for(@question) do |f| %>
+
+    <%= render 'common/form_errors', object: @question %>
+    <p>
+        <%= f.label :Question %><br/>
+        <%= f.text_field :body %>
+    </p>
+    <p>
+        <%= f.label :solved %> <%= f.check_box :solved %>
+    </p>
+
+    <p>
+      <%= f.submit "Update", :disable_with => "Updating Question....!", class: "btn btn-success"  %>
+
+    </p>
+<% end %>

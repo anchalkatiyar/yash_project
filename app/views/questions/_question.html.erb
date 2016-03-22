@@ -1,0 +1,12 @@
+<ul>
+<li>
+	<%= link_to truncate(question.body, length: 40),question %> by <%= question.user.full_name.capitalize %>
+	</li>
+	
+	<% if on_your_questions_page? %>
+	<%= display_solved(question) %>-	<%= link_to 'Edit',edit_question_path(question) %>
+
+	<% end %>
+	(<%= pluralize(question.answers.count,'answer') %>)
+	</ul>
+	

@@ -1,0 +1,51 @@
+
+<%= provide(:title,'ASK question')%>
+<div id="ask">
+<h2> Ask</h2>
+	<% if logged_in? %>
+		<%= render 'question_form' %>
+	<% else %>
+		<p> Please Login to ask question</p>
+	<% end %>
+
+</div><!-- end ask-->
+
+<div id="questions">
+<h2> Unsolved Questions</h2>
+	<% if @questions.any? %>
+		<ul>
+		<%= render @questions %>		
+		</ul>
+		<div class="digg_pagination">
+			<!-- <div class="page_info">
+			  <% page_entries_info @questions %>
+			</div> -->
+		<%= will_paginate @questions%>
+		</div>
+		
+
+  <!-- HERE adding a hidden DIV that contains a form. -->
+<script>
+$(document).ready(function(){
+    $("#hide").click(function(){
+        $("p").hide();
+    });
+    $("#show").click(function(){
+        $("p").show();
+    });
+});
+</script>
+</head>
+<body>
+
+<p>If you click on the "Hide" button, I will disappear.</p>
+
+<button id="hide" class="btn btn-success">Hide</button>
+<button id="show" class="btn btn-success">Show</button>
+		
+	<% else %>
+		<p> Please Login to ask question</p>
+	<% end %>
+
+</div><!-- end questions -->
+

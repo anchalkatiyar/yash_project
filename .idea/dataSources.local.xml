@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails yash_project: development" uuid="597e3bc9-40e8-4d08-94ac-7edf9d9e1a8b">
+      <auth-required>false</auth-required>
+    </data-source>
+    <data-source name="Rails yash_project: test" uuid="6248399f-3a72-4b69-b2a5-e9325b5e1285">
+      <auth-required>false</auth-required>
+    </data-source>
+  </component>
+</project>

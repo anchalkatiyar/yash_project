@@ -1,9 +1,13 @@
 class StatusesController < ApplicationController
   # GET /statuses
   # GET /statuses.json
+  
+  before_filter :authenticate_user!, only: [:new, :create, :edit, :update,:destroy]
+  
   def index
   #yash project
-    @statuses = Status.all
+    #@statuses = Status.all
+	@statuses = Status.page(params[:page]).order('created_at DESC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -80,6 +84,19 @@ class StatusesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to statuses_url }
       format.json { head :no_content }
+	  format.js   { render :layout => false }
     end
+  end
+  
+  def p_show
+	@user = User.find(params[:id])	
+	# @status = Status.find(params[:id])
+		if @user
+			#@statuses = Status.all
+			@statuses = @user.statuses.all
+			render action: :p_show
+		else			 
+			render file 'public/404', status: 404, formats: [:html]
+		end
   end
 end

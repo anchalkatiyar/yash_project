@@ -1,0 +1,16 @@
+<%= provide(:title,'Your Questions')%>
+<h2> Questions</h2>
+<% if @questions.any? %>
+	<ul>	
+		<%= render @questions %>  
+	</ul>	
+	<div class="digg_pagination">
+			<div class="page_info">
+			  <%= page_entries_info @questions %>
+			</div>
+		<%= will_paginate @questions%>
+		</div>
+	<% will_paginate %>
+	<% else %>
+		<p> You didnt asked any question !</p>
+	<% end %>

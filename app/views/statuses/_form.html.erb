@@ -1,4 +1,5 @@
-<%= form_for(@status) do |f| %>
+<%= simple_form_for(@status,html:{class:"form-horizontal"}) do |f| %>
+
   <% if @status.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@status.errors.count, "error") %> prohibited this status from being saved:</h2>
@@ -11,15 +12,11 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_area :content %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+<%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id } %>
+ <% f.input :user_id, collection: User.all, label_method: :full_name %>
+  <% f.input_field  :content , :input_html => {:maxlength => 15, :size => 10}%>
+  <%= f.input_field :content, as: :text, class: "my-custom-class", rows: 5 %>
+  <div style=" margin: 10px 0px 10px 0px; padding: 0px;">
+    <%= f.button :submit , class: "btn btn-success"%>
   </div>
 <% end %>
