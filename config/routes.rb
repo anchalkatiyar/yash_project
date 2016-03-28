@@ -1,94 +1,52 @@
 YashProject::Application.routes.draw do
+#get request than url name than controller name and # and method name than , than as than name which is used in view	
   get "questions/index"
 
   get "profiles/show"
 
-  devise_for :users
+  #devise_for :users
 
-  devise_scope :user do
-	get 'register' , to: 'devise/registrations#new',as: :register
-	get 'login' , to: 'devise/sessions#new',as: :login
-	get 'logout' , to: 'devise/sessions#destroy',as: :logout
-#get request than url name than controller name and # and method name than , than as than name which is used in view	
-	
+ # devise_scope :user do
+#	get 'register' , to: 'devise/registrations#new',as: :register
+#	get 'login' , to: 'devise/sessions#new',as: :login
+#	get 'logout' , to: 'devise/sessions#destroy',as: :logout	
+#  end
+  
+  as :user do
+	get '/register' , to: 'devise/registrations#new',as: :register
+	get '/login' , to: 'devise/sessions#new',as: :login
+	get '/logout' , to: 'devise/sessions#destroy',as: :logout	
   end
-  
-  
-  resources :statuses
-  
+ 
+ devise_for :users,skip: [:sessions]
+ 
+ as :user do 		
+	get "/login" => 'devise/sessions#new', as: :new_user_session
+	post "/login" => 'devise/sessions#create', as: :user_session
+	delete "logout" => 'devise/sessions#destroy', as: :destroy_user_session
+ end
+ 
   resources :questions, except: [:new] do
-	resources :answers, only: [:create]	
+		resources :answers, only: [:create]	
   end
-  get 'feed', to: 'statuses#index', as: :feed
-  #root to: 'statuses#index'
-  root to: 'questions#index'
-   #get "user_profile", to: 'profiles#show'
-   #match "profile" => "users#show", :as => 'profile'
-   get "statuses/p_show/:id" => "statuses#p_show", :as => 'p_show'
-    
-   get '/your_questions', to: 'questions#your_questions'
-   #get '/status_page', to: 'statuses#status_page'
-  get 'profiles/show/:id', to: 'profiles#show'
   
-  #get '/search', to: 'questions#search'
- # post 'search' , to: 'questions#search',as: :search
-  #map.resources :search, :collection => { :index => :get, :results => :get }
-  #root :to => "home#index"
+  resources :user_friendships 
   
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
+  resources :statuses  
+		get 'feed', to: 'statuses#index', as: :feed
+		#root to: 'statuses#index'
+		root to: 'questions#index'
+		#get "user_profile", to: 'profiles#show'
+		#match "profile" => "users#show", :as => 'profile'
+		get "statuses/p_show/:id" => "statuses#p_show", :as => 'p_show'
 
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
-
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
-
-  # See how all your routes lay out with "rake routes"
-
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
-end
+		get '/your_questions', to: 'questions#your_questions'
+		#get '/status_page', to: 'statuses#status_page'
+		#get 'profiles/show/:id', to: 'profiles#show'
+		get '/:id', to: 'profiles#show',as: 'profile'
+		#get '/search', to: 'questions#search'
+		# post 'search' , to: 'questions#search',as: :search
+		#map.resources :search, :collection => { :index => :get, :results => :get }
+		#root :to => "home#index"
+		
+ end

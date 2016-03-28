@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 
+  <title><%= yield(:title)%></title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "bootstrap" %>
+   
+  <%= csrf_meta_tags %>
+</head>
+<body>
+		<div class="navbar navbar-fixed-top navbar-inverse">
+			<div class="navbar-inner">
+				<div class="container"><%= image_tag "tp-1.png",width:"40px"%>
+					
+						 <%= link_to "Yash Book" , root_url, class: 'brand'  %>
+							<ul class="nav">
+								<li><%= link_to "All Statuses", feed_path %></li>
+								
+							</ul>
+							<ul class="nav pull-right">
+							<% if user_signed_in? %>
+								<li><%= link_to "Yours Qs", your_questions_path %></li>
+								<li><%= link_to current_user.full_name ,edit_user_registration_path %></li>
+								<li><%= link_to current_user.profile_name ,profiles_show_path(current_user) %></li>
+								<li><%= link_to "View Profile" , {:controller => "profiles", :action => "show", :id => current_user.profile_name }%></li>
+								<li><%= link_to "Log Out" ,logout_path %></li>
+							<% else %>
+								<li><%= link_to "Register" , register_path %></li>
+								<li><%= link_to "Login" , login_path %></li>
+							<% end %>	
+							
+				
+				</div>
+				
+			</div>	</ul>
+		</div>	
+		<div class="container">
+		
+		<% flash.each do |type, message| %>
+			<div class="alert <%= flash_class type %>" >
+				<button class="close" data-dismiss="alert">x</button> 
+				<%= message %>
+			</div>		
+		<% end %>		
+			<%= yield %>
+			
+		</div>
+		</header>
+		
+		</div>
+</body>
+</html>

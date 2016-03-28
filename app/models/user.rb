@@ -10,10 +10,11 @@ class User < ActiveRecord::Base
   has_many :statuses
   has_many :questions
   has_many :answers
-  validates :first_name, presence: true
+  has_many :user_friendships
+  has_many :friends,through: :user_friendships
   
-  validates :last_name, presence: true
- 
+  validates :first_name, presence: true  
+  validates :last_name, presence: true 
   validates :profile_name, presence: true,uniqueness: true,format: {
 																	with: /^[a-zA-Z0-9_-]+$/,
 																	message: "Must be formatted correctly"
@@ -22,6 +23,12 @@ class User < ActiveRecord::Base
   def full_name
 	first_name + " "+ last_name
   end
+  
+  # to_param is a rails method to link the object instead of using object id more info at this url => https://gist.github.com/cdmwebs/1209732
+  def to_param
+	profile_name
+  end
+  # end to_param
   
   def gravatar_url
 	stripped_email = email.strip

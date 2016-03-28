@@ -13,7 +13,21 @@
 */
 	body{
 		padding-top:40px;	
+		background: -webkit-linear-gradient(180deg, #79a8a9 10%, #79a8a9 90%);
 	}
+	
+	/*body {
+	height: 100%;
+	padding-top:40px;	
+	  background: -webkit-linear-gradient(90deg, #1D976C 10%, #993399 90%);
+	  background:    -moz-linear-gradient(90deg, #1D976C 10%, #993399 90%);
+	  background:     -ms-linear-gradient(90deg, #1D976C 10%, #993399 90%);
+	  background:      -o-linear-gradient(90deg, #1D976C 10%, #993399 90%);
+	  background:         linear-gradient(90deg, #1D976C 10%, #993399 90%);
+	  font-family: 'Lato', sans-serif;
+	  
+	}*/
+
 	
 	.alert{
 		margin-top: 10px;	

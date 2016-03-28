@@ -1,0 +1,39 @@
+<div class="page-header">
+	<h2> Posts</h2>
+</div>
+<table>
+  <%= link_to 'Post a New Status', new_status_path , class: "btn btn-success" %>
+<% @statuses.each do |status| %>
+	<div class="status">
+	
+		<div class="row">
+				<div class="span1">
+					<% image_tag status.user.gravatar_url %>
+					<%= link_to image_tag(status.user.gravatar_url, :alt => "User"),profile_path(status.user)%>
+					
+				</div>
+				<div class="span7">
+					<strong> <%= status.user.full_name %> </strong>
+					<%= link_to "View Profile", {:controller => "statuses", :action => "p_show", :id => status.user_id }%>
+					<%= link_to status.user.full_name , {:controller => "profiles", :action => "show", :id => status.user.profile_name }%>
+					
+					<p><%= status.content %></p>
+					<div  style=" font-family: Raleway,Helvetica,"Helvetica Neue",Helvetica,Arial,sans-serif;"%>
+						<%= link_to time_ago_in_words(status.created_at)+ " ago", status %> 
+						<% if (user_signed_in? && (current_user.id == status.user_id)) %>
+						<span class="admin">
+						|	<%= link_to "Edit" , edit_status_path(status) %> |
+							<%= link_to "Delete" ,status, method: :delete , data:  {confirm: 'DELETE STATUS?'},:remote => true, :class => 'row'%> 
+						</span>
+						<% end %>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+<% end %>
+<div class="digg_pagination">
+	<!-- <div class="page_info">
+	  <% page_entries_info @statuses %>
+	</div> -->
+<%= will_paginate @statuses %>

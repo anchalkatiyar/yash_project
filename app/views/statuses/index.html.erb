@@ -8,13 +8,14 @@
 	
 		<div class="row">
 				<div class="span1">
-					<%= image_tag status.user.gravatar_url %>
+					<% image_tag status.user.gravatar_url %>
+					<%= link_to image_tag(status.user.gravatar_url),profile_path(status.user)%>
 					
 				</div>
 				<div class="span7">
 					<strong> <%= status.user.full_name %> </strong>
 					<%= link_to "View Profile", {:controller => "statuses", :action => "p_show", :id => status.user_id }%>
-					<%= link_to status.user.full_name , {:controller => "profiles", :action => "show", :id => status.user.profile_name }%>
+					<%= link_to status.user.full_name ,profile_path(current_user)%>
 					
 					<p><%= status.content %></p>
 					<div  style=" font-family: Raleway,Helvetica,"Helvetica Neue",Helvetica,Arial,sans-serif;"%>
