@@ -17,6 +17,7 @@
   <% f.input_field  :content , :input_html => {:maxlength => 15, :size => 10}%>
   <%= f.input_field :content, as: :text, class: "my-custom-class", rows: 5 %>
   <div style=" margin: 10px 0px 10px 0px; padding: 0px;">
-    <%= f.button :submit , class: "btn btn-success"%>
+  <%= image_tag 'document_edit.png',width: '35px' %>
+    <%= f.button :submit, class: "btn btn-success" , data: { disable_with: "<i class='glyphicon glyphicon-edit'></i> Loading..." } %><i class="icon-gift"></i>
   </div>
 <% end %>

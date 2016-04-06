@@ -1,6 +1,9 @@
 
 <%= provide(:title,'ASK question')%>
+
+
 <div id="ask">
+ 	
 <h2> Ask</h2>
 	<% if logged_in? %>
 		<%= render 'question_form' %>
@@ -20,7 +23,7 @@
 			<!-- <div class="page_info">
 			  <% page_entries_info @questions %>
 			</div> -->
-		<%= will_paginate @questions%>
+		<%= will_paginate @questions, :previous_label => 'Previous Page', :next_label => 'Next Page'%>
 		</div>
 		
 

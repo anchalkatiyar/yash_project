@@ -11,7 +11,31 @@ class User < ActiveRecord::Base
   has_many :questions
   has_many :answers
   has_many :user_friendships
-  has_many :friends,through: :user_friendships
+  has_many :friends,through: :user_friendships, 
+							  conditions: {user_friendships:{state: 'accepted'}}
+  
+  
+  has_many :pending_user_friendships,class_name: 'UserFriendship',
+									foreign_key: :user_id,									
+									conditions: {state: 'pending'}
+  
+  has_many :pending_friends, through: :pending_user_friendships,source: :friend
+  
+  has_many :requested_user_friendships, class_name: 'UserFriendship',
+                                      foreign_key: :user_id,
+                                      conditions: { state: 'requested' }
+  has_many :requested_friends, through: :requested_user_friendships, source: :friend
+  
+  has_many :blocked_user_friendships, class_name: 'UserFriendship',
+                                      foreign_key: :user_id,
+                                      conditions: { state: 'blocked' }
+  has_many :blocked_friends, through: :blocked_user_friendships, source: :friend
+  
+  has_many :accepted_user_friendships, class_name: 'UserFriendship',
+                                      foreign_key: :user_id,
+                                      conditions: { state: 'accepted' }
+  has_many :accepted_friends, through: :accepted_user_friendships, source: :friend
+  
   
   validates :first_name, presence: true  
   validates :last_name, presence: true 
@@ -38,8 +62,11 @@ class User < ActiveRecord::Base
   end
   
   def your_questions(params)
-	questions.paginate(page: params[:page],per_page: 2).order('created_at DESC')
-		
+	questions.paginate(page: params[:page],per_page: 2).order('created_at DESC')		
+  end
+  
+  def has_blocked?(other_user)
+	blocked_friends.include?(other_user)  
   end
   
 end

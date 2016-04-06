@@ -10,6 +10,7 @@ gem 'sqlite3'
 gem 'devise'
 gem 'simple_form'
 gem 'state_machine'
+gem 'js-routes'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -24,7 +25,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'therubyracer', :platforms => :ruby
+#gem 'therubyracer', :platforms => :ruby
 gem 'execjs'
 
 # To use ActiveModel has_secure_password

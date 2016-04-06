@@ -30,7 +30,12 @@ YashProject::Application.routes.draw do
 		resources :answers, only: [:create]	
   end
   
-  resources :user_friendships 
+  resources :user_friendships do
+	member do
+		put :accept
+		put :block
+	end
+  end
   
   resources :statuses  
 		get 'feed', to: 'statuses#index', as: :feed

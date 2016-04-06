@@ -4,8 +4,12 @@
  
   <title><%= yield(:title)%></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  
+   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+   
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "bootstrap" %>
+  <%= javascript_include_tag "js-routes" %>
    
   <%= csrf_meta_tags %>
 </head>
@@ -45,6 +49,7 @@
 										  <ul class="dropdown-menu">
 										   <li><%= link_to "Yours Questions", your_questions_path %></li>
 											<li><%= link_to "Edit Profile " + current_user.full_name ,edit_user_registration_path %></li>
+											<li><%= link_to "Friends " ,user_friendships_path %></li>
 											<li><% link_to current_user.profile_name ,profiles_show_path(current_user) %></li>
 											<li><%= link_to "View Profile" ,profile_path(current_user)%></li>
 											<li><%= link_to "Log Out" ,logout_path %></li>
@@ -59,14 +64,15 @@
 				
 			</div>	</ul>
 		</div>	
-		<div class="container">
+		<div class="container" >
 		
 		<% flash.each do |type, message| %>
 			<div class="alert <%= flash_class type %>" >
 				<button class="close" data-dismiss="alert">x</button> 
 				<%= message %>
 			</div>		
-		<% end %>		
+		<% end %>
+	
 			<%= yield %>
 			
 		</div>
