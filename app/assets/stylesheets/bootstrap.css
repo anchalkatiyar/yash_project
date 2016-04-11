@@ -226,16 +226,18 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 20px;
-  color: #C8C8C8;
+  color: #ffffff;
   background-color: #ffffff;
 }
 
 a {
   color: #0088cc;
   text-decoration: none;
+  
 }
-
-a:hover,
+/*
+a:hover,*/
+a:hover { text-decoration: underline; },
 a:focus {
   color: #005580;
   text-decoration: underline;

@@ -5,10 +5,10 @@
 		<%= render @questions %>  
 	</ul>	
 	<div class="digg_pagination">
-			<div class="page_info">
-			  <%= page_entries_info @questions %>
-			</div>
-		<%= will_paginate @questions%>
+			
+			  <% page_entries_info @questions %>
+			
+		<%= will_paginate @questions, :previous_label => 'Previous Page', :next_label => 'Next Page'%>
 		</div>
 	<% will_paginate %>
 	<% else %>

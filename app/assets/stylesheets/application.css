@@ -14,15 +14,17 @@
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
-	background: -webkit-linear-gradient(180deg, #272B30 10%, #272B30 90%);
+	
     line-height: 1.42857143;
-	//text-shadow: 2px 5px 5px green;
+	
 	padding-top:40px;
-    color: #C8C8C8;
+    text-shadow: 1px 1px 1px #5c5c3d;
+	background: -webkit-linear-gradient(180deg, #acac86 10%, #2e2e1f 90%);
+	/*color: #C8C8C8;
     background-color: #272B30;
 	background-image: url(/assets/search-bg.jpg);
-	 background-size: 1380px 645px;
-	background-repeat: no-repeat;
+	background-size: 1380px 645px;
+	background-repeat: no-repeat;*/
 }
 	/*body{
 		padding-top:40px;	
@@ -48,7 +50,54 @@ body {
 		margin-top: 10px;	
 	}
 	
-	
+
+.box {
+	border: 1px red dotted;
+}
+
+.container {
+	max-width: 1000px;
+}
+
+.profile {
+	margin-right: 40px;
+}
+
+.profile aside p {
+	font-size: 12px;
+}
+
+.profile aside ul li {
+	float: left;
+	margin-right: 8px;
+}
+
+.profile aside ul {
+	list-style: none;
+	padding: 0px;
+}
+
+@media (max-width: 992px) {
+	.profile-image {
+		float: left;
+		margin-right: 15px;
+	}
+
+	.profile-content {
+		float: left;
+		margin-bottom: 10px;
+	}
+
+	.social-icons {
+		margin-left: 115px;
+	}
+}
+
+@media (min-width: 485px) and (max-width: 992px) {
+	.social-icons {
+		float: right;
+	}
+}	
 /* Misc. Class Styles */
 
 .pagination {

@@ -1,9 +1,15 @@
 YashProject::Application.routes.draw do
+  #resources :pictures
+
+  #resources :albums
+
 #get request than url name than controller name and # and method name than , than as than name which is used in view	
   get "questions/index"
 
   get "profiles/show"
-
+  #get "/pages/:page" => "pages#show"
+  get "pages/about"
+  
   #devise_for :users
 
  # devise_scope :user do
@@ -35,6 +41,12 @@ YashProject::Application.routes.draw do
 		put :accept
 		put :block
 	end
+  end
+  
+  scope ":profile_name" do
+    resources :albums do
+      resources :pictures
+    end
   end
   
   resources :statuses  

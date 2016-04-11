@@ -1,5 +1,13 @@
 <div class="page-header">
-  <h1><%= @user.full_name %></h1>
+  <h1><% if current_user.avatar? %>
+    <div class="control-group">
+      <label class="control-label">Current Profile Image</label>
+      <div class="controls">
+        <%= image_tag @user.avatar.url(:thumb) %>   <%= @user.full_name %>
+      </div>
+    </div>
+       
+    <% end %> </h1>
 </div>
 
 <% if signed_in? %>
@@ -11,6 +19,7 @@
   <% end %>
 </div>
 <% end %>
+
 
 <% if @statuses %>
   <% @statuses.each do |status| %>

@@ -1,15 +1,20 @@
 <div class="page-header">
-  <h1>Viewing Friendship</h1>
+  <h3>Viewing Friendship</h3>
 </div>
 
 <div class="row">
   <div class="avatar span2">
-    <%= image_tag @user_friendship.user.gravatar_url %><br />
+    
+	<%= avatar_profile_link @user_friendship.user, {}, class: 'pull-left' %>
+	<% image_tag @user_friendship.user.gravatar_url %><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <%= @user_friendship.user.first_name %>
   </div>
   <div class="avatar span2">
-    <%= image_tag @user_friendship.friend.gravatar_url %><br />
-    <%= @user_friendship.friend.first_name %>
+    <% image_tag @user_friendship.friend.gravatar_url %>
+	<%= avatar_profile_link @user_friendship.friend, {}, class: 'pull-left' %><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <%= @user_friendship.friend.first_name %>
   </div>
 </div>
 <hr />
@@ -31,3 +36,4 @@
       <%= submit_tag "Delete Friendship", class: 'btn btn-danger' %>
   <% end %>
 </div>
+<%= link_to "Back to Friend List", user_friendships_path , class: 'btn btn-info btn-small'%>

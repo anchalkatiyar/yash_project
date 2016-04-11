@@ -24,10 +24,11 @@
 					</div>
 					
 						 <%= link_to "Yash Book" , root_url, class: 'brand'  %>
-							<ul class="nav">
-								<li><%= link_to "All Statuses", feed_path %></li>
-								
-							</ul>
+							<% if user_signed_in? %>
+								<ul class="nav">
+									<li><%= link_to "All Statuses", feed_path %></li>									
+								</ul>
+							<% end %>	
 							<ul class="nav pull-right">
 							<% if user_signed_in? %>
 								<li><% link_to "Yours Qs", your_questions_path %></li>
@@ -49,15 +50,17 @@
 										  <ul class="dropdown-menu">
 										   <li><%= link_to "Yours Questions", your_questions_path %></li>
 											<li><%= link_to "Edit Profile " + current_user.full_name ,edit_user_registration_path %></li>
+											<li><%= link_to "Albums " ,albums_path(current_user) %></li>
 											<li><%= link_to "Friends " ,user_friendships_path %></li>
 											<li><% link_to current_user.profile_name ,profiles_show_path(current_user) %></li>
 											<li><%= link_to "View Profile" ,profile_path(current_user)%></li>
 											<li><%= link_to "Log Out" ,logout_path %></li>
 										  </ul>
-									</div>
+									</div><ul class="nav pull-right"><li><%= link_to "About YashBook" ,pages_about_path %></li></ul>
 									<% else %>
 									<li><%= link_to "Register" , register_path %></li>
 										<li><%= link_to "Login" , login_path %></li>
+										<ul class="nav pull-right"><li><%= link_to "About Yash" ,pages_about_path %></li></ul>
 							<% end %>
 				
 				</div>
@@ -65,14 +68,14 @@
 			</div>	</ul>
 		</div>	
 		<div class="container" >
-		
-		<% flash.each do |type, message| %>
-			<div class="alert <%= flash_class type %>" >
-				<button class="close" data-dismiss="alert">x</button> 
-				<%= message %>
-			</div>		
-		<% end %>
-	
+			<%= render_breadcrumbs %>
+			<% flash.each do |type, message| %>
+				<div class="alert <%= flash_class type %>" >
+					<button class="close" data-dismiss="alert">x</button> 
+					<%= message %>
+				</div>		
+			<% end %>
+			
 			<%= yield %>
 			
 		</div>

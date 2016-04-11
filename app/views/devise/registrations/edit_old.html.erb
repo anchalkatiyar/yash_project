@@ -1,0 +1,41 @@
+<%= simple_form_for(@status, html: {class: "form-horizontal", multipart: true}) do |f| %>
+
+  <% if @status.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@status.errors.count, "error") %> prohibited this status from being saved:</h2>
+
+      <ul>
+      <% @status.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+					<% f.input :user_id, collection: User.all, label_method: :full_name %>
+					<% f.input_field  :content , :input_html => {:maxlength => 15, :size => 10}%>
+					<% f.input_field :content, as: :text, class: "my-custom-class", rows: 5 %>
+<%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id } %>					
+<%= f.input :content, input_html:{rows:3,class:'input-xxlarge'}%>
+  
+ <%= f.fields_for :document do |document_fields| %>
+    <% if document_fields.object.attachment? %>
+    <div class="control-group">
+      <label class="control-label">Current attachment</label>
+      <div class="controls">
+        <%= link_to document_fields.object.attachment_file_name, document_fields.object.attachment.url %>
+      </div>
+    </div>
+    <%= document_fields.input :remove_attachment, as: :boolean, label: "Remove attachment?" %>
+    <% end %>
+    <%= document_fields.input :attachment, as: :file %>
+  <% end %>
+
+  
+  <div style=" margin: 10px 10px 10px 0px; padding: 0px;">
+  <%= image_tag 'document_edit.png',width: '35px' %>
+    <%= f.button :submit, class: "btn btn-success" , data: { disable_with: "Loading..." } %>
+  </div>
+<% end %>
+ <%= link_to "Back", statuses_path, class:'btn btn-info btn-xs'%>

@@ -7,7 +7,7 @@ class Question < ActiveRecord::Base
 	validates :solved, inclusion: {in: [true,false]}
 	
 	def self.unsolved(params)  
-		where(solved: false).paginate(page: params[:page], per_page: 2).order('created_at DESC')
+		where(solved: false).paginate(page: params[:page], per_page: 4).order('created_at DESC')
     end
 	
 

@@ -1,37 +1,41 @@
 
 
 <%= provide(:title,'View Question')%>
+<h3>
+</h3>
+<div id="post-answer">
+
+
+
+	<% if logged_in? %>
+		<%= render 'answers/answer_form' %>
+	<% else %>
+		<p> please login to post an answer for this question </p>
+	<% end %>
+
+</div>
 
 <h3>
 <%= @question.user.full_name.capitalize %> asks:
 
 <h3>
 <div id="container">
-<%= @question.body %>
-
-Question status : <%= display_solved(@question) %>
-
-</div>
+	<%= @question.body %>
+	<span style="margin:400px;text-align: right;line-height: 1.8;">
+	Status : <%= display_solved(@question) %>
+	</span>
+	</div>
 <hr/>
-<div id="answers">
-<h2>Answers</h2>
 
-<% if @question.answers.any? %>
-	<%= render @question.answers %>
-<% else %>
-	<p>This question has no answer </p>
-<% end %>
+<h3>Answers</h3>
+	<ul style="line-height: 1.8;">
+	<span style="text-align:justify;line-height: 1.8; " >
+	<% if @question.answers.any? %>
+		<%= render @question.answers %>
+	<% else %>
+		<p>This question has no answer </p>
+	<% end %>
+	</span>
+	</ul>
 
-</div>
 <hr/>
-<div id="post-answer">
-<h3> Answer this question </h3>
-
-
-<% if logged_in? %>
-	<%= render 'answers/answer_form' %>
-<% else %>
-	<p> please login to post an answer for this question </p>
-<% end %>
-
-</div>

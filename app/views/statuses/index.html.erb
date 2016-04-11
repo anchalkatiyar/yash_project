@@ -2,36 +2,45 @@
 	<h2> Posts</h2>
 </div>
 <table>
-  <%= link_to 'Post a New Status', new_status_path , class: "btn btn-success" %>
+<div style="float:right;"><%= link_to 'Post a New Status', new_status_path , class: "btn btn-success" %></div>
 <% @statuses.each do |status| %>
   <% if can_display_status?(status) %>
 		<div class="status">		
 				<div class="row">
 						<div class="span1">
+						  <%= avatar_profile_link status.user, {}, class: 'pull-left' %>
 							<% image_tag status.user.gravatar_url %>
-							<%= link_to image_tag(status.user.gravatar_url),profile_path(status.user)%>
+							<% link_to image_tag(status.user.gravatar_url),profile_path(status.user)%>
 							
 						</div>
-						<div class="span7">
+						<div class="span11">
 							<strong> <% status.user.full_name %><%= link_to status.user.full_name ,profile_path(status.user)%> </strong>
 							<% link_to "View Profile", {:controller => "statuses", :action => "p_show", :id => status.user_id }%>
 							<% link_to status.user.full_name ,profile_path(current_user)%>
 							
 							<p><%= status.content %></p>
-							
+							 <%= status_document_link(status) %>
+							  <div class="meta">
+								Posted on
 								<%= link_to time_ago_in_words(status.created_at)+ " ago", status %> 
 								<% if (user_signed_in? && (current_user.id == status.user_id)) %>
 								<span class="admin">
-								|	<%= link_to "Edit" , edit_status_path(status) %> |
-									<%= link_to "Delete" ,status, method: :delete , data:  {confirm: 'DELETE STATUS?'},:remote => true, :class => 'row'%> 
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<%= link_to "Edit" , edit_status_path(status) , class: "btn btn-success" %> &nbsp;
+									<%= link_to "Delete" ,status, method: :delete , data:  {confirm: 'DELETE STATUS?'},:remote => true, :class => 'row' ,class: "btn btn-success" %> 
 								</span>
 								<% end %>
+							</div>	
 						</div>
 					</div>
 				</div>			
 		</div>
 	<% end %>	
 <% end %>
+</table>
+
 <div class="digg_pagination">
 	<!-- <div class="page_info">
 	  <% page_entries_info @statuses %>

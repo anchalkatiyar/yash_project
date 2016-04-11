@@ -1,15 +1,48 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"><% notice %></p>
 
 <p>
-  <b>Name:</b>
-  <%= @status.user.full_name %>
+  <b><!-- Name: --></b>
+  <% @status.user.full_name %>
 </p>
 
 <p>
-  <b>Content:</b>
-  <%= @status.content %>
+  <b><!-- Content: --></b>
+  <% @status.content %>
 </p>
 
 
-<%= link_to 'Edit', edit_status_path(@status) %> |
-<%= link_to 'Back', statuses_path %>
+<% link_to 'Edit', edit_status_path(@status) %> 
+<% link_to 'Back', statuses_path %>
+
+
+<div class="row">
+  <div class="span8 offset2">
+    
+      <h1>
+       
+        <%= @status.user.full_name %>
+        
+      </h1>
+    
+
+    <p>
+      <%= @status.content %>
+    </p>
+<small><%= time_ago_in_words(@status.created_at) + " ago" %></small>
+    <hr />
+
+    <% if @status.document && @status.document.attachment? %>
+      <%= status_document_link @status %>
+      <hr />
+    <% end %>
+
+    <div class="meta">
+      <%= link_to 'Back to Statuses', statuses_path , class:'btn btn-info btn-xs'%>
+      <% if signed_in? && @status.user == current_user %>
+        |
+        <%= link_to "Edit Status", edit_status_path(@status), class:'btn btn-info btn-xs' %> | 
+        <%= link_to "Delete", @status, method: :delete, data: { confirm: "Are you sure your want to delete this status?"} , class:'btn btn-info btn-xs'%>
+      <% end %>
+    </div>
+  </div>
+</div>

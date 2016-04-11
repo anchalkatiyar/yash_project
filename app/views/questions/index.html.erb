@@ -1,14 +1,13 @@
 
 <%= provide(:title,'ASK question')%>
 
-
 <div id="ask">
  	
-<h2> Ask</h2>
+<h2> Post a Question</h2>
 	<% if logged_in? %>
 		<%= render 'question_form' %>
 	<% else %>
-		<p> Please Login to ask question</p>
+		<p> Please <%= link_to "Login" , login_path %> to ask question</p>
 	<% end %>
 
 </div><!-- end ask-->
@@ -17,7 +16,8 @@
 <h2> Unsolved Questions</h2>
 	<% if @questions.any? %>
 		<ul>
-		<%= render @questions %>		
+								
+		<%= render @questions %>	
 		</ul>
 		<div class="digg_pagination">
 			<!-- <div class="page_info">
@@ -40,12 +40,12 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<!-- 
+	<p>If you click on the "Hide" button, I will disappear.</p>
 
-<p>If you click on the "Hide" button, I will disappear.</p>
-
-<button id="hide" class="btn btn-success">Hide</button>
-<button id="show" class="btn btn-success">Show</button>
-		
+	<button id="hide" class="btn btn-success">Hide</button>
+	<button id="show" class="btn btn-success">Show</button>
+-->		
 	<% else %>
 		<p> Please Login to ask question</p>
 	<% end %>

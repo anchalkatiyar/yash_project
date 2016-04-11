@@ -1,5 +1,5 @@
 <ul>
-<li>
+<li><% avatar_profile_link question.user, {}, class: 'pull-left' %>
 	<%= link_to truncate(question.body, length: 40),question %> by <%= question.user.full_name.capitalize %>
 	</li>
 	
@@ -7,6 +7,8 @@
 	<%= display_solved(question) %>-	<%= link_to 'Edit',edit_question_path(question) %>
 
 	<% end %>
-	(<%= pluralize(question.answers.count,'answer') %>)
+	 posted on <%= link_to time_ago_in_words(question.created_at)+ " ago", question.body %> 
+	 (<%= pluralize(question.answers.count,'answer') %>)
 	</ul>
 	
+<hr/>
